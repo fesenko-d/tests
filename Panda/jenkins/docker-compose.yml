@@ -1,0 +1,20 @@
+services:
+  jenkins-service:
+    container_name: jenkins-test
+    image: jenkins/jenkins:lts
+    # image: $IMAGE
+    privileged: true
+    user: root
+    restart: always
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    # environment:
+    #   - JENKINS_ADMIN_PASSWORD=$JENKINS_ADMIN_PASSWORD
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
